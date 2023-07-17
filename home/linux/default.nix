@@ -13,32 +13,40 @@
     #"Xft.dpi" = 172;
   };
 
-  programs.git = {
-    enable = true;
-    userName = "EndlessPeak";
-    userEmail = "endlesspeak@163.com";
-  };
+  # programs.git = {
+  #   enable = true;
+  #   userName = "EndlessPeak";
+  #   userEmail = "endlesspeak@163.com";
+  #   defaultBranch = "main";
+  # };
 
   home.packages = with pkgs;[
-    neofetch
+    # Extract Files
     zip
     xz
     unzip
     p7zip
 
+    # Search Utils
     ripgrep
     fzf
 
+    # TUI Programs
     cowsay
+    neofetch
+    gitui
 
-    hugo
+    # TUI Monitor
     btop
-
+    htop
+    
+    # Other Programs
+    hugo
   ];
 
-  programs.alacritty = {
-    enable = true;
-  };
+  # programs.alacritty = {
+  #   enable = true;
+  # };
 
   home.stateVersion = "23.05";
 

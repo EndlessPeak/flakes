@@ -34,16 +34,20 @@
 
       # Adobe SiYuan
       source-sans # No Chinese. Including `Source Sans 3` `Source Sans Pro` `Source Sans 3 VF`
-      source-serif # No Chinese. Source Code Pro
+      source-serif # No Chinese.
+      source-code-pro #Source Code Pro
       source-han-sans # Chinese HeiTi
       source-han-serif # Chinese Song
+
+      # LXGW-WenKai
+      lxgw-wenkai
 
       # nerdfonts
       (nerdfonts.override {
         fonts = [
           "FiraCode"
           "JetBrainsMono"
-          "SourceCodePro"
+          "Source Code Pro"
           "Iosevka"
         ];
       })
@@ -73,6 +77,7 @@
       fcitx5-rime
       fcitx5-chinese-addons
       fcitx5-table-extra
+      # The following shows how to use NUR packages
       config.nur.repos.ruixi-rebirth.fcitx5-pinyin-moegirl
       config.nur.repos.ruixi-rebirth.fcitx5-pinyin-zhwiki
     ];
@@ -90,6 +95,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # Polkit
+    libsForQt5.polkit-kde-agent
 
     # Editor
     neovim 
@@ -99,10 +106,17 @@
     v2raya
 
     # Software
+    alsa-lib
+    alsa-utils
     firefox
+    flameshot
 
     # Terminal
     alacritty
+ 
+    # Graphics
+    xclip
+    xorg.xrandr
 
     # python,I may need to use python with root permission.
     (python310.withPackages (ps: with ps; [
@@ -167,10 +181,11 @@
   services.flatpak.enable = true;
 
   # security with polkit
+  security.polkit.enable = true;
+
   services.power-profiles-daemon = {
     enable = true;
   };
-  security.polkit.enable = true;
   # Following are security with gnome-kering
   # services.gnome.gnome-keyring.enable = true;
   # security.pam.services.greetd.enableGnomeKeyring = true;
@@ -187,13 +202,12 @@
   #   ];
   # };
 
-  # android development tools, this will install adb/fastboot and other android tools and udev rules
-  # see https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/adb.nix
-  # programs.adb.enable = true;
-
+  # Proxy
+  services.v2raya.enable = true;
+  
+  # XDG
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
     # Sets environment variable NIXOS_XDG_OPEN_USE_PORTAL to 1
     # This will make xdg-open use the portal to open programs,
     # which resolves bugs involving programs opening inside FHS envs or with unexpected env vars set from wrappers.
