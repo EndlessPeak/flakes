@@ -3,8 +3,11 @@
 {
   programs.git = {
     enable = true;
+    userName = "EndlessPeak";
+    userEmail = "endlesspeak@163.com";
+    extraConfig = {
+      init = { defaultBranch = "main"; };
+    };
   };
-
-  xdg.configFile."git/config.toml".source = ./config;
 
 }

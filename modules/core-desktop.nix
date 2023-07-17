@@ -47,7 +47,7 @@
         fonts = [
           "FiraCode"
           "JetBrainsMono"
-          "Source Code Pro"
+          "SauceCodePro"
           "Iosevka"
         ];
       })

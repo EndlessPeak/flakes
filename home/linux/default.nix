@@ -13,13 +13,6 @@
     #"Xft.dpi" = 172;
   };
 
-  # programs.git = {
-  #   enable = true;
-  #   userName = "EndlessPeak";
-  #   userEmail = "endlesspeak@163.com";
-  #   defaultBranch = "main";
-  # };
-
   home.packages = with pkgs;[
     # Extract Files
     zip
@@ -44,9 +37,7 @@
     hugo
   ];
 
-  # programs.alacritty = {
-  #   enable = true;
-  # };
+  programs.zsh.enable = true;
 
   home.stateVersion = "23.05";
 
