@@ -47,7 +47,7 @@
         fonts = [
           "FiraCode"
           "JetBrainsMono"
-          "SauceCodePro"
+          "SourceCodePro"
           "Iosevka"
         ];
       })
@@ -229,4 +229,7 @@
   ];
   # set user's default shell system-wide
   users.defaultUserShell = pkgs.bash;
+
+  # enable zsh system-wide
+  programs.zsh.enable = true;
 }

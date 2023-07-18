@@ -25,6 +25,7 @@
     fzf
 
     # TUI Programs
+    lolcat
     cowsay
     neofetch
     gitui
@@ -37,7 +38,7 @@
     hugo
   ];
 
-  programs.zsh.enable = true;
+  # programs.zsh.enable = true;
 
   home.stateVersion = "23.05";
 
