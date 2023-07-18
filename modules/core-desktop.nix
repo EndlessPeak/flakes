@@ -92,7 +92,7 @@
     fcitx5.addons = with pkgs; [
       (fcitx5-rime.override {
         rimeDataPkgs = [
-          rime-data
+          # rime-data
           config.nur.repos.linyinfeng.rimePackages.rime-ice
         ];
         # config.nur.repos.linyinfeng.rimePackages.rime-ice
