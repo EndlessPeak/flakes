@@ -1,4 +1,4 @@
-{ config, ... } @ args:
+{ config, pkgs, ... } @ args:
 
 # leesin's main computer
 
@@ -22,6 +22,10 @@
     "exfat"
   ];
 
+  # Kernel Version
+  # Always use the latest version
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.loader ={
     efi = {
       canTouchEfiVariables = false;
@@ -39,15 +43,6 @@
     hostName = "leesin";   # Define your hostname.
     networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   };
-
-  # Nvidia GPU
-  # services.xserver.videoDrivers = [ "nvidia" ]; # will install nvidia-vaapi-driver by default
-  # hardware.nvidia = {
-  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-  #   nvidiaSettings = true;
-  #   modesetting.enable = true;
-  #   powerManagement.enable = true;
-  # };
  
   # List packages installed in system profile. To search, run:
   # $ nix search wget

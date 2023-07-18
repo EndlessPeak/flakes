@@ -21,6 +21,7 @@
     p7zip
 
     # Search Utils
+    fd
     ripgrep
     fzf
 
@@ -34,7 +35,11 @@
     btop
     htop
     
-    # Other Programs
+    # KDE Programs
+    latte-dock
+    lightly-qt
+
+    # Others
     hugo
   ];
 

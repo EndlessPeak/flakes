@@ -74,6 +74,7 @@
     git # used by nix flakes
 
     # Basic
+    linuxHeaders
     linux-firmware
 
     # Editor
@@ -115,9 +116,4 @@
   #   enable = true;
   # };
 
-  # for power management
-  services.power-profiles-daemon = {
-    enable = true;
-  };
-  services.upower.enable = true;
 }

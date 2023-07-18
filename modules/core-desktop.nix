@@ -4,13 +4,24 @@
   # NixOS's core configuration for leesin's desktop computer
   # This file aims to build X11 KDE Environment
 
+  # We need to enable unfree packages
+  nixpkgs.config = {
+    allowUnfree = lib.mkForce true;
+    joypixels.acceptLicense = true;
+  };
+
   imports = [
     ./core-server.nix
+    ./nvidia.nix
   ];
 
-  # to install chrome, you need to enable unfree packages
-  nixpkgs.config.allowUnfree = lib.mkForce true;
-
+  # For power management
+  # Conflicts with services.tlp
+  services = {
+    power-profiles-daemon.enable = false;
+    upower.enable = true;
+  };
+ 
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -22,7 +33,7 @@
 
     fonts = with pkgs; [
       # icon fonts
-      # material-design-icons
+      material-design-icons
       font-awesome
 
       # Noto for no tofu
@@ -39,8 +50,13 @@
       source-han-sans # Chinese HeiTi
       source-han-serif # Chinese Song
 
-      # LXGW-WenKai
+      # Other Fonts
       lxgw-wenkai
+      liberation_ttf
+
+      # Font
+      # keep reporting license issue,must add license in nixpkgs
+      joypixels
 
       # nerdfonts
       (nerdfonts.override {
@@ -109,6 +125,7 @@
     alsa-lib
     alsa-utils
     firefox
+    google-chrome
     flameshot
 
     # Terminal
@@ -181,11 +198,34 @@
   services.flatpak.enable = true;
 
   # security with polkit
-  security.polkit.enable = true;
-
-  services.power-profiles-daemon = {
+  security.polkit = {
     enable = true;
+    extraConfig =
+    ''
+      polkit.addRule(function(action, subject) {
+        if ((action.id == "org.freedesktop.udisks2.filesystem-mount-system" || action.id == "org.freedesktop.udisks.filesystem-mount-system-internal")  &&
+            subject.local && subject.isInGroup("wheel"))
+        {
+            return polkit.Result.YES;
+        }
+      });
+    '';
   };
+  systemd = {
+    user.services.plasma-polkit-agent = {
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+
   # Following are security with gnome-kering
   # services.gnome.gnome-keyring.enable = true;
   # security.pam.services.greetd.enableGnomeKeyring = true;
