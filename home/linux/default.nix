@@ -40,6 +40,7 @@
     lightly-qt
 
     # Others
+    obs-studio
     hugo
   ];
 
