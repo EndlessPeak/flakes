@@ -32,6 +32,7 @@
     gitui
 
     # TUI Monitor
+    lf # inspired by ranger
     btop
     htop
     
@@ -40,6 +41,7 @@
     lightly-qt
 
     # Others
+    vlc
     obs-studio
     hugo
   ];

@@ -13,15 +13,21 @@
     options = lib.mkDefault "--delete-older-than 3d";
   };
 
-  # Manual optimise storage: nix-store --optimise
-  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
-  nix.settings.auto-optimise-store = true;
+  nix.settings = {
+    # Manual optimise storage: nix-store --optimise
+    # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
+    auto-optimise-store = true;
 
-  # enable flakes globally
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
-  # trusted users
-  nix.settings.trusted-users = ["leesin"];
+    # enable flakes globally
+    experimental-features = [ "nix-command" "flakes" ];
+
+    # trusted users
+    trusted-users = ["leesin"];
+
+    # Protect nix-shell against garbage collection
+    keep-outputs = true;
+    keep-derivations = true;
+  };
 
   # Allow unfree packages,it will be enable in desktop.nix
   nixpkgs.config.allowUnfree = lib.mkDefault false;
