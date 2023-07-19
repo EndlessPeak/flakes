@@ -55,7 +55,7 @@
       x64_specialArgs = {
         pkgs-unstable = import inputs.nixpkgs-unstable {
           system = x64_system;
-          config.allowUnfree =true;
+          config.allowUnfree = true;
         };
       };
       leesin_laptop_modules = [

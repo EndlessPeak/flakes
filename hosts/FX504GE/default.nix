@@ -1,19 +1,8 @@
-{ config, pkgs, ... } @ args:
+{ config, pkgs, lib, ... } @ args:
 
 # leesin's main computer
 
 {
-  imports = [
-    # hardware scan
-    ./hardware-configuration.nix
-
-    # add arch linux boot entry
-    ./boot-arch.nix
-
-    # NixOS configuration
-    ../../modules/core-desktop.nix
-    ../../modules/user-group.nix
-  ];
   boot.supportedFilesystems = [
     "ext4"
     "ntfs"
@@ -87,4 +76,25 @@
 
   time.hardwareClockInLocalTime = true;
 
+  # We need to enable unfree packages
+  nixpkgs.config = {
+    allowUnfree = lib.mkForce true;
+    joypixels.acceptLicense = true;
+  };
+
+  # import other components
+  imports = [
+    # hardware scan
+    ./hardware-configuration.nix
+
+    # add arch linux boot entry
+    ./boot-arch.nix
+
+    # NixOS configuration
+    ../../modules
+    ../../modules/desktop
+    ../../modules/hardware
+    ../../modules/user
+    ../../modules/editor/emacs.nix
+  ];
 }

@@ -4,17 +4,6 @@
   # NixOS's core configuration for leesin's desktop computer
   # This file aims to build X11 KDE Environment
 
-  # We need to enable unfree packages
-  nixpkgs.config = {
-    allowUnfree = lib.mkForce true;
-    joypixels.acceptLicense = true;
-  };
-
-  imports = [
-    ./core-server.nix
-    ./nvidia.nix
-  ];
-
   # For power management
   # Conflicts with services.tlp
   services = {
@@ -95,13 +84,12 @@
           # rime-data
           config.nur.repos.linyinfeng.rimePackages.rime-ice
         ];
-        # config.nur.repos.linyinfeng.rimePackages.rime-ice
       })
       fcitx5-chinese-addons
       fcitx5-table-extra
       # The following shows how to use NUR packages
       config.nur.repos.ruixi-rebirth.fcitx5-pinyin-moegirl
-      config.nur.repos.ruixi-rebirth.fcitx5-pinyin-zhwiki
+      config.nur.repos.ruixi-rebirth.fcitx5-pinyin-moegirl
     ];
   };
  
@@ -122,7 +110,7 @@
 
     # Editor
     neovim 
-    emacs29
+    # emacs29
 
     # Proxy
     v2raya
