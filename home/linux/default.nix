@@ -14,17 +14,24 @@
   };
 
   home.packages = with pkgs;[
-    # Extract Files
+    # Extract Tools
     zip
     xz
     unzip
     p7zip
 
     # Search Utils
-    fd
-    ripgrep
-    fzf
+    fd # replace for find
+    ripgrep # replace for grep
+    fzf # fzf has a dependency on fd
 
+    # TUI utils
+    exa # replace for ls
+    bat # replace for cat
+    tldr # replace for man page,too long don't read
+    zoxide # replace for cd
+    delta # replace for diff
+    
     # TUI Programs
     lolcat
     cowsay
