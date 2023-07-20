@@ -32,7 +32,7 @@
     gitui
 
     # TUI Monitor
-    lf # inspired by ranger
+    joshuto
     btop
     htop
     

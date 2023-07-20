@@ -7,8 +7,8 @@
     direnv.nix-direnv.enable = true;
   };
 
-  programs.zsh ={
-    enable = true;
-    initExtra = "source ~/.config/zsh/zshrc\n";
-  };
+  # programs.zsh ={
+  #   enable = true;
+  #   initExtra = "source ~/.config/zsh/zshrc\n";
+  # };
 }
