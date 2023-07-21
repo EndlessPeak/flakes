@@ -92,9 +92,10 @@
 
     # NixOS configuration
     ../../modules
-    ../../modules/desktop
     ../../modules/hardware
+    ../../modules/desktop
     ../../modules/user
     ../../modules/editor/emacs.nix
+    ../../modules/develop
   ];
 }
