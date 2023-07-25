@@ -1,11 +1,11 @@
- { stdenv, lib, buildFHSUserEnv, autoPatchelfHook, unzip, dpkg, gtk3,
-   cairo, glib, webkitgtk, libusb1, bash, libsecret, alsa-lib, bzip2,
-   openssl, udev, ncurses5, tlf, xorg, fontconfig, pcsclite, python3, ...
+{ stdenv, lib, buildFHSUserEnv, autoPatchelfHook, unzip, dpkg, gtk3,
+  cairo, glib, webkitgtk, libusb1, bash, libsecret, alsa-lib, bzip2,
+  openssl, udev, ncurses5, tlf, xorg, fontconfig, pcsclite, python3, ...
 }:
 let
   makeself-pkg = stdenv.mkDerivation {
     name = "stm32cubeide-makeself-pkg";
-    src = ~/Downloads/en.st-stm32cubeide_1.13.0_17399_20230707_0829_amd64.sh.zip;
+    src = ./en.st-stm32cubeide_1.13.0_17399_20230707_0829_amd64.sh.zip;
     unpackCmd = "mkdir tmp && ${unzip}/bin/unzip -d tmp $src";
     installPhase = ''
       sh st-stm32cubeide_1.13.0_17399_20230707_0829_amd64.sh --target $out --noexec
@@ -51,14 +51,29 @@ let
       tar zxf $src -C $out
     '';
   };
+  stlink-server = stdenv.mkDerivation {
+    name = "stlink-server-2.1.1-1";
+    src = "${makeself-pkg}/st-stlink-server.2.1.1-1-linux-amd64.install.sh";
+    nativeBuildInputs = [ autoPatchelfHook ];
+    buildInputs = [ libusb1 ];
+    unpackCmd = "sh $src --target dir --noexec";
 
+    installPhase = ''
+      ls -lR
+      mkdir -p $out/bin
+      cp stlink-server $out/bin
+    '';
+  };
 in
 buildFHSUserEnv {
   name = "stm32cubeide";
 
   targetPkgs = pkgs: with pkgs; [
     stm32cubeide
-    gtk3 cairo glib webkitgtk
+    gtk3
+    cairo
+    glib
+    webkitgtk
     stdenv.cc.cc.lib # libstdc++.so.6
     libsecret
     alsa-lib

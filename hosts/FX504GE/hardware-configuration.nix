@@ -11,7 +11,7 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.kernelParams = [ "nouveau.modeset=0" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-intel" "ch341" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =

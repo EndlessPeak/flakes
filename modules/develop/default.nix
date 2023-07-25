@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = with pkgs;[
+    universal-ctags
     stm32cubemx
     jetbrains.clion
     openocd
