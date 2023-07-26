@@ -42,10 +42,19 @@
       # Other Fonts
       lxgw-wenkai
       liberation_ttf
+      arkpandora_ttf
 
       # Font
       # keep reporting license issue,must add license in nixpkgs
       joypixels
+
+      # Code and Symbol
+      symbola
+      cascadia-code
+
+      # Chinese
+      wqy_zenhei
+      wqy_microhei
 
       # nerdfonts
       (nerdfonts.override {

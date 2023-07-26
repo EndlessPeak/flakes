@@ -48,6 +48,7 @@
     lightly-qt
 
     # Others
+    qq
     vlc
     obs-studio
     hugo
