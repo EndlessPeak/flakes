@@ -2,7 +2,7 @@
 
 {
   environment.systemPackages = with pkgs;[
-    sbcl # required by emacs lsp vfork
+    # sbcl # required by emacs lsp vfork
     universal-ctags
     stm32cubemx
     jetbrains.clion

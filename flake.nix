@@ -37,6 +37,7 @@
 
     # flake-root.url = "github:srid/flake-root";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     # flake-compat = {
     #   url = "github:inclyc/flake-compat";
@@ -50,13 +51,13 @@
   # However, `self` is an exception, this special parameter points to the `outputs` itself (self-reference)
   outputs = inputs@{ self, nixpkgs, nur, home-manager, ... }:
     let
-      #selfPkgs = import ./pkgs;
       x64_system = "x86_64-linux";
       x64_specialArgs = {
         pkgs-unstable = import inputs.nixpkgs-unstable {
           system = x64_system;
           config.allowUnfree = true;
-        };
+        };  
+        inputs=inputs;
       };
       leesin_laptop_modules = [
         ./hosts/FX504GE
@@ -71,7 +72,6 @@
 
       ];
     in {
-      #overlays.default = selfPkgs.overlay;
       nixosConfigurations =
         let
           system = x64_system;

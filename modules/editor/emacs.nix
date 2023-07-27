@@ -1,18 +1,27 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
-  environment.systemPackages = with pkgs-unstable;[
-    ((emacsPackagesFor emacs29).emacsWithPackages
+
+  nixpkgs.overlays = [
+    inputs.emacs-overlay.overlay
+  ];
+  environment.systemPackages = with pkgs;[
+    ((emacsPackagesFor emacs-unstable).emacsWithPackages
       (epkgs:[
         epkgs.vterm
       ]))
+    
+    # ((emacsPackagesFor emacs29).emacsWithPackages
+    #   (epkgs:[
+    #     epkgs.vterm
+    #   ]))
   ];
   services.emacs = {
     enable = true;
-    package = with pkgs-unstable;
-      ((emacsPackagesFor emacs29).emacsWithPackages
-        (epkgs: [
-          epkgs.vterm
-        ]));
+    package = pkgs.emacs-unstable;
+      # ((emacsPackagesFor emacs29).emacsWithPackages
+      #   (epkgs: [
+      #     epkgs.vterm
+      #   ]));
   };
 }
