@@ -30,20 +30,18 @@ let
       fontconfig
       pcsclite
       python3
-      libusb1
-      (with xorg; [
-        libX11
-        libSM
-        libICE
-        libXrender
-        libXrandr
-        libXfixes
-        libXcursor
-        libXext
-        libXtst
-        libXi
-      ])
-    ];
+    ] ++ (with xorg; [
+      libX11
+      libSM
+      libICE
+      libXrender
+      libXrandr
+      libXfixes
+      libXcursor
+      libXext
+      libXtst
+      libXi
+    ]);
     autoPatchelfIgnoreMissingDeps = true; # libcrypto.so.1.0.0
     preferLocalBuild = true;
     installPhase = ''
@@ -70,10 +68,8 @@ buildFHSUserEnv {
 
   targetPkgs = pkgs: with pkgs; [
     stm32cubeide
-    gtk3
-    cairo
-    glib
-    webkitgtk
+    gtk3 cairo glib webkitgtk
+
     stdenv.cc.cc.lib # libstdc++.so.6
     libsecret
     alsa-lib
@@ -85,6 +81,9 @@ buildFHSUserEnv {
     fontconfig
     pcsclite
     python3
+
+    stlink-server
+    ncurses5
   ];
 
   runScript = ''
