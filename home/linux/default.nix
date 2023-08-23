@@ -51,7 +51,10 @@
     qq
     vlc
     obs-studio
+
+    # blog
     hugo
+    pandoc
   ];
 
   # programs.zsh.enable = true;

@@ -137,6 +137,7 @@
     # Graphics
     xclip
     xorg.xrandr
+    libsForQt5.krdc
 
     # python,I may need to use python with root permission.
     (python310.withPackages (ps: with ps; [
