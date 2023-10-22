@@ -9,7 +9,7 @@
     substituters = [
       "https://mirrors.cernet.edu.cn/nix-channels/store"
       "https://mirrors.bfsu.edu.cn/nix-channels/store"
-      "https://cache.nixos.org/"
+      #"https://cache.nixos.org/"
     ];
   };
 
@@ -59,8 +59,7 @@
         };  
         inputs=inputs;
       };
-      leesin_laptop_modules = [
-        ./hosts/FX504GE
+      common_modules = [
         nur.nixosModules.nur
         home-manager.nixosModules.home-manager
         {
@@ -69,17 +68,26 @@
           home-manager.extraSpecialArgs = x64_specialArgs;
           home-manager.users.leesin = import ./home/linux;
         }
-
       ];
+      leesin_laptop_modules = [ ./hosts/FX504GE ];
+      leesin_desktop_modules = [ ./hosts/MaxSun ];
     in {
       nixosConfigurations =
         let
           system = x64_system;
           specialArgs = x64_specialArgs;
         in {
+          leesin_laptop = nixpkgs.lib.nixosSystem {
+            inherit system specialArgs;
+            modules =
+              leesin_laptop_modules
+              ++ common_modules;
+          };
           leesin = nixpkgs.lib.nixosSystem {
             inherit system specialArgs;
-            modules = leesin_laptop_modules;
+            modules =
+              leesin_desktop_modules
+              ++ common_modules;
           };
         };
     };    

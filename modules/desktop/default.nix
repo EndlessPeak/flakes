@@ -109,7 +109,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -118,7 +118,9 @@
     libsForQt5.polkit-kde-agent
 
     # Editor
-    neovim 
+    vim
+    neovim
+    kate
     # emacs29
 
     # Proxy
