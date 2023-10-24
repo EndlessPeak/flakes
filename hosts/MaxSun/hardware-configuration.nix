@@ -10,17 +10,17 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.kernelParams = [ "nouveau.modeset=0" ];
-  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/282d9674-008f-4120-a033-1d4daba0f384";
+    { device = "/dev/disk/by-uuid/185e8fed-e082-425d-bf77-06fcc5a89862";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/0E5B-27B5";
+    { device = "/dev/disk/by-uuid/637F-1B19";
       fsType = "vfat";
     };
 

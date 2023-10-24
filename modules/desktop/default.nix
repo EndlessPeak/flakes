@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 
 {
   # NixOS's core configuration for leesin's desktop computer
@@ -90,15 +90,15 @@
     fcitx5.addons = with pkgs; [
       (fcitx5-rime.override {
         rimeDataPkgs = [
-          # rime-data
+          rime-data
           config.nur.repos.linyinfeng.rimePackages.rime-ice
         ];
       })
       fcitx5-chinese-addons
       fcitx5-table-extra
       # The following shows how to use NUR packages
-      config.nur.repos.ruixi-rebirth.fcitx5-pinyin-moegirl
-      config.nur.repos.ruixi-rebirth.fcitx5-pinyin-moegirl
+      #config.nur.repos.ruixi-rebirth.fcitx5-pinyin-moegirl
+      #config.nur.repos.ruixi-rebirth.fcitx5-pinyin-moegirl
     ];
   };
  
@@ -123,9 +123,6 @@
     kate
     # emacs29
 
-    # Proxy
-    v2raya
-
     # Software
     alsa-lib
     alsa-utils
@@ -142,13 +139,13 @@
     libsForQt5.krdc
 
     # python,I may need to use python with root permission.
-    (python310.withPackages (ps: with ps; [
-      ipython
-      pandas
-      requests
-      pyquery
-      pyyaml
-    ]))
+    #(python310.withPackages (ps: with ps; [
+    #  ipython
+    #  pandas
+    #  requests
+    #  pyquery
+    #  pyyaml
+    #]))
   ];
 
   # Enable the X11 windowing system.
@@ -278,4 +275,8 @@
 
   # enable zsh system-wide
   programs.zsh.enable = true;
+
+  imports = [
+    ./unstable-software.nix
+  ];
 }
