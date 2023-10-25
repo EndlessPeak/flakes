@@ -46,16 +46,16 @@
     # KDE Programs
     # latte-dock is out of date,I want to override it.
     # Refer to https://nixos.org/manual/nixpkgs/stable/#chap-overrides
-    # (latte-dock.overrideAttrs{
-    #   version = "v0.10";
-    #   src = fetchFromGitLab {
-    #     domain = "invent.kde.org";
-    #     owner = "plasma";
-    #     repo = "latte-dock";
-    #     rev = "a840ac6faa9acb1570f8fa016e7ac7f2e5686e90";
-    #     sha256 = "sha256-+9ksvGB6IRlJ1PXsrLA5PuHFCHs80tkKPAu2iknNEAQ=";
-    #   };
-    # })
+    (latte-dock.overrideAttrs{
+      version = "v0.10";
+      src = fetchFromGitLab {
+        domain = "invent.kde.org";
+        owner = "plasma";
+        repo = "latte-dock";
+        rev = "a840ac6faa9acb1570f8fa016e7ac7f2e5686e90";
+        sha256 = "sha256-+9ksvGB6IRlJ1PXsrLA5PuHFCHs80tkKPAu2iknNEAQ=";
+      };
+    })
 
     lightly-qt
 
@@ -65,6 +65,9 @@
     ffmpeg
     # Others
     qq
+
+    # SFTP
+    filezilla
 
     # blog
     hugo
