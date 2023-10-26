@@ -6,7 +6,7 @@
     inputs.emacs-overlay.overlay
   ];
   environment.systemPackages = with pkgs;[
-    ((emacsPackagesFor emacs-unstable).emacsWithPackages
+    ((emacsPackagesFor emacs-git).emacsWithPackages
       (epkgs:[
         epkgs.vterm
       ]))
@@ -18,7 +18,7 @@
   ];
   services.emacs = {
     enable = true;
-    package = pkgs.emacs-unstable;
+    package = pkgs.emacs-git;
       # ((emacsPackagesFor emacs29).emacsWithPackages
       #   (epkgs: [
       #     epkgs.vterm

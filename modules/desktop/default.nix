@@ -138,6 +138,13 @@
     xorg.xrandr
     libsForQt5.krdc
 
+    # Nix Utils
+    nix-prefetch-git
+    
+    # SDDM Theme Dependencies
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtgraphicaleffects
+
     # python,I may need to use python with root permission.
     #(python310.withPackages (ps: with ps; [
     #  ipython
@@ -149,15 +156,20 @@
   ];
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
 
-  # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+    # Enable the Plasma 5 Desktop Environment.
+    displayManager ={
+      sddm.enable = true;
+      sddm.theme = "${import ./sddm-theme.nix { inherit pkgs;}}";
+    };
+
+    desktopManager.plasma5.enable = true;
   
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
+  };
   # PipeWire is a new low-level multimedia framework.
   # It aims to offer capture and playback for both audio and video with minimal latency.
   # It support for PulseAudio-, JACK-, ALSA- and GStreamer-based applications. 
