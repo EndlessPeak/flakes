@@ -154,6 +154,8 @@
     #  pyquery
     #  pyyaml
     #]))
+
+    config.nur.repos.xddxdd.qqmusic
   ];
 
 

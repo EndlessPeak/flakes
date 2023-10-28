@@ -75,14 +75,15 @@
       hugo
       pandoc
 
-      # lang server
-      nixd
-
       # temporily software
       yt-dlp
     ])
     (with pkgs-unstable;[
       eza # exa now is renamed to eza,it aims to take place of ls
+
+      # lang server
+      nixd
+
     ])
   ];
   # programs.zsh.enable = true;

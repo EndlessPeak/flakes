@@ -80,14 +80,14 @@
           leesin_laptop = nixpkgs.lib.nixosSystem {
             inherit system specialArgs;
             modules =
-              leesin_laptop_modules
-              ++ common_modules;
+              common_modules ++
+              leesin_laptop_modules;
           };
           leesin = nixpkgs.lib.nixosSystem {
             inherit system specialArgs;
             modules =
-              leesin_desktop_modules
-              ++ common_modules;
+              common_modules ++
+              leesin_desktop_modules; 
           };
         };
     };    

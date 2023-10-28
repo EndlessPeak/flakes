@@ -18,8 +18,11 @@ pkgs.stdenv.mkDerivation {
     # };
 
     # if fetchFromGitLab is used,the real url's format must like "gitlab.com/owner/repo"
-    src = pkgs.fetchgit {
-        url = "https://framagit.org/MarianArlt/sddm-sugar-candy.git";
+    src = pkgs.fetchFromGitLab {
+        domain = "framagit.org";
+        owner = "MarianArlt";
+        repo = "sddm-sugar-candy";
+        #url = "https://framagit.org/MarianArlt/sddm-sugar-candy.git";
         rev = "2b72ef6c6f720fe0ffde5ea5c7c48152e02f6c4f";
         sha256 = "1db4p2d0k5a6avr7dg9h1r7y9mx711ci5dgwmljqjb8pq5b0a22y";
     };
