@@ -5,9 +5,11 @@
 { config, pkgs, lib, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./nvidia.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -26,7 +28,7 @@
   #boot.loader.systemd-boot.enable = true;
   #boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "leesin";   # Define your hostname.
+  networking.hostName = "endlesspeak";   # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -41,7 +43,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-    font = "Lat2-Terminus16";
+    # font = "Lat2-Terminus16";
     # keyMap = "us";
     useXkbConfig = true; # use xkbOptions in tty.
   };
@@ -54,7 +56,7 @@
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
-  
+
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -64,8 +66,8 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  sound.enable = false;
+  hardware.pulseaudio.enable = false;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
@@ -81,7 +83,7 @@
     experimental-features = ["nix-command" "flakes"];
   };
 
-  #nix.settings.  
+  #nix.settings.
   #nix.settings.substituters = lib.mkForce [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
   #nix.settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];
   #nix.settings.substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
@@ -96,11 +98,11 @@
     glibcLocales
 
     # editor
+    kate
     vim
     neovim
-    emacs29
 
-    # utils 
+    # utils
     tree
     wget
     curl
@@ -149,4 +151,3 @@
 
   time.hardwareClockInLocalTime = true;
 }
-

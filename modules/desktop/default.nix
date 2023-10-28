@@ -90,7 +90,7 @@
     fcitx5.addons = with pkgs; [
       (fcitx5-rime.override {
         rimeDataPkgs = [
-          rime-data
+          # rime-data
           config.nur.repos.linyinfeng.rimePackages.rime-ice
         ];
       })
@@ -135,6 +135,7 @@
  
     # Graphics
     xclip
+    xdg-utils
     xorg.xrandr
     libsForQt5.krdc
 
@@ -155,37 +156,40 @@
     #]))
   ];
 
+
+  services = {
   # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
+    xserver = {
+      enable = true;
 
-    # Enable the Plasma 5 Desktop Environment.
-    displayManager ={
-      sddm.enable = true;
-      sddm.theme = "${import ./sddm-theme.nix { inherit pkgs;}}";
+      # Enable the Plasma 5 Desktop Environment.
+      displayManager ={
+        sddm.enable = true;
+        sddm.theme = "${import ./sddm-theme.nix { inherit pkgs;}}";
+      };
+
+      desktopManager.plasma5.enable = true;
+
+      # Enable touchpad support (enabled default in most desktopManager).
+      libinput.enable = true;
     };
+    # PipeWire is a new low-level multimedia framework.
+    # It aims to offer capture and playback for both audio and video with minimal latency.
+    # It support for PulseAudio-, JACK-, ALSA- and GStreamer-based applications.
+    # PipeWire has a great bluetooth support, it can be a good alternative to PulseAudio.
+    # https://nixos.wiki/wiki/PipeWire
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      # jack.enable = true;
 
-    desktopManager.plasma5.enable = true;
-  
-    # Enable touchpad support (enabled default in most desktopManager).
-    libinput.enable = true;
-  };
-  # PipeWire is a new low-level multimedia framework.
-  # It aims to offer capture and playback for both audio and video with minimal latency.
-  # It support for PulseAudio-, JACK-, ALSA- and GStreamer-based applications. 
-  # PipeWire has a great bluetooth support, it can be a good alternative to PulseAudio.
-  #     https://nixos.wiki/wiki/PipeWire
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    # jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+      # use the example session manager (no others are packaged yet so this is enabled by default,
+      # no need to redefine it in your config for now)
+      #media-session.enable = true;
+    };
   };
 
   # Remove sound.enable or turn it off if you had it set previously
@@ -207,10 +211,18 @@
   # Bluetooth devices automatically connect with bluetoothctl as well:
   # [bluetooth] # trust [hex-address]
   hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  services = {
+    blueman.enable = true;
 
-  # https://flatpak.org/setup/NixOS
-  services.flatpak.enable = true;
+    # https://flatpak.org/setup/NixOS
+    flatpak.enable = true;
+
+    # Proxy
+    v2raya.enable = true;
+
+    # sysstat
+    sysstat.enable = true;
+  };
 
   # security with polkit
   security.polkit = {
@@ -257,9 +269,6 @@
   #   ];
   # };
 
-  # Proxy
-  services.v2raya.enable = true;
-  
   # XDG
   xdg.portal = {
     enable = true;
@@ -269,7 +278,7 @@
     # xdg-open is used by almost all programs to open a unknown file/uri
     # alacritty as an example, it use xdg-open as default, but you can also custom this behavior
     # and vscode has open like `External Uri Openers`
-    xdgOpenUsePortal = false;
+    xdgOpenUsePortal = true;
     extraPortals = with pkgs; [
       # xdg-desktop-portal-wlr # for wlroots based compositors(hyprland/sway)
       xdg-desktop-portal-gtk # for gtk

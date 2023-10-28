@@ -93,6 +93,7 @@
     wget
     curl
     tree
+    killall
     
     # System tools
     sysstat
