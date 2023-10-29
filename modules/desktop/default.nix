@@ -91,7 +91,9 @@
       (fcitx5-rime.override {
         rimeDataPkgs = [
           # rime-data
-          config.nur.repos.linyinfeng.rimePackages.rime-ice
+          # config.nur.repos.
+          nur.repos.xddxdd.rime-ice
+          # nur.repos.linyinfeng.rimePackages.rime-ice
         ];
       })
       fcitx5-chinese-addons
@@ -155,7 +157,9 @@
     #  pyyaml
     #]))
 
-    config.nur.repos.xddxdd.qqmusic
+    # config.nur.repos.xddxdd.qqmusic 
+    # nur.repos.xddxdd.qqmusic
+    
   ];
 
 

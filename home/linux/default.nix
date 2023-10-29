@@ -67,6 +67,7 @@
 
       # Others
       qq
+      nur.repos.xddxdd.qqmusic
 
       # SFTP
       filezilla
@@ -75,6 +76,10 @@
       hugo
       pandoc
 
+      # tex & org export
+      bibtex2html
+      texlive.combined.scheme-full
+      
       # temporily software
       yt-dlp
     ])

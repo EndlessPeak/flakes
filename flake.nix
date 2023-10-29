@@ -1,18 +1,6 @@
 {
   description = "LeeSin's NixOS Flake Configuration";
 
-  # nixConfig only affects the flake itself,not the system configuration
-  nixConfig ={
-    # enable nixcomman and flakes for nixos-rebuild switch --flake
-    experimental-features = [ "nix-command" "flakes"];
-    # replace official cache with mirrors located in China
-    substituters = [
-      "https://mirrors.cernet.edu.cn/nix-channels/store"
-      "https://mirrors.bfsu.edu.cn/nix-channels/store"
-      #"https://cache.nixos.org/"
-    ];
-  };
-
   # The `inputs` are the dependencies of the flake.
   # Each item in `inputs` will be passed as a parameter to the `outputs` function after being pulled and built.
   # Only create all nixpkgs instances in this file!
@@ -46,12 +34,38 @@
 
   };
 
+  # nixConfig only affects the flake itself,not the system configuration
+  nixConfig ={
+    # enable nixcomman and flakes for nixos-rebuild switch --flake
+    experimental-features = [ "nix-command" "flakes"];
+    # replace official cache with mirrors located in China
+    substituters = [
+      "https://mirrors.cernet.edu.cn/nix-channels/store"
+      "https://mirrors.bfsu.edu.cn/nix-channels/store"
+      #"https://cache.nixos.org/"
+    ];
+  };
+
   # The `outputs` function will return all the build results of the flake. 
+  # A flake can have many use cases and different types of outputs.
   # Parameters in `outputs` are defined in `inputs` and can be referenced by their names. 
   # However, `self` is an exception, this special parameter points to the `outputs` itself (self-reference)
-  outputs = inputs@{ self, nixpkgs, nur, home-manager, ... }:
+  # The `@` syntax here is used to alias the attribute set of the inputs's parameter, making it convenient to use inside the function.
+  outputs = inputs@{
+    self,
+    nixpkgs,
+    nur,
+    home-manager,
+    ...
+  }:
     let
+      username = "leesin";
+      userfullname = "Lee Sin";
+      useremail = "endlesspeak@163.com";
+
       x64_system = "x86_64-linux";
+      # allSystems = [ x64_system ];
+
       x64_specialArgs = {
         pkgs-unstable = import inputs.nixpkgs-unstable {
           system = x64_system;
@@ -60,7 +74,9 @@
         inputs=inputs;
       };
       common_modules = [
-        nur.nixosModules.nur
+        # use nur overlay instead of the following modules
+        # so that the home manager config files can use nur pkgs too
+        # nur.nixosModules.nur
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -79,13 +95,16 @@
         in {
           leesin_laptop = nixpkgs.lib.nixosSystem {
             inherit system specialArgs;
-            modules =
+            modules = 
+              # use nur overlay 
+              [{ nixpkgs.overlays = [ nur.overlay ]; }] ++
               common_modules ++
               leesin_laptop_modules;
           };
           leesin = nixpkgs.lib.nixosSystem {
             inherit system specialArgs;
             modules =
+              [{ nixpkgs.overlays = [ nur.overlay ]; }] ++
               common_modules ++
               leesin_desktop_modules; 
           };
