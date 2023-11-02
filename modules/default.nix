@@ -85,6 +85,7 @@
 
     # Editor
     vim
+    neovim
 
     # Locales
     glibcLocales
@@ -106,9 +107,5 @@
 
   # replace default editor with emacs
   environment.variables.EDITOR = "emacs";
-
-  # virtualisation.docker = {
-  #   enable = true;
-  # };
 
 }

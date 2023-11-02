@@ -7,6 +7,8 @@
     stm32cubemx
     jetbrains.clion
     openocd
+
+    rustup
     # Warning:
     # The following nixpkgs are packaged by leesin
     # wihout any test!
@@ -18,4 +20,17 @@
   services.udev.packages = with pkgs;[
     stlink
   ];
+
+  # virtualisation configuration
+  virtualisation = {
+      vmware.host = {
+          enable = true;
+          package = pkgs.vmware-workstation;
+          extraConfig = ''
+            mks.gl.allowUnsupportedDrivers = "TRUE"
+            mks.vk.allowUnsupportedDevices = "TRUE"
+          '';
+      };
+  };
+
 }

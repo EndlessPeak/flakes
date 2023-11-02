@@ -92,8 +92,8 @@
         rimeDataPkgs = [
           # rime-data
           # config.nur.repos.
-          nur.repos.xddxdd.rime-ice
-          # nur.repos.linyinfeng.rimePackages.rime-ice
+          # nur.repos.xddxdd.rime-ice
+          nur.repos.linyinfeng.rimePackages.rime-ice
         ];
       })
       fcitx5-chinese-addons
@@ -120,8 +120,6 @@
     libsForQt5.polkit-kde-agent
 
     # Editor
-    vim
-    neovim
     kate
     # emacs29
 
@@ -131,6 +129,7 @@
     firefox
     google-chrome
     flameshot
+    telegram-desktop
 
     # Terminal
     alacritty
@@ -140,6 +139,7 @@
     xdg-utils
     xorg.xrandr
     libsForQt5.krdc
+    libsForQt5.filelight
 
     # Nix Utils
     nix-prefetch-git
@@ -159,7 +159,6 @@
 
     # config.nur.repos.xddxdd.qqmusic 
     # nur.repos.xddxdd.qqmusic
-    
   ];
 
 
@@ -305,5 +304,6 @@
 
   imports = [
     ./unstable-software.nix
+    ./private-package.nix
   ];
 }
