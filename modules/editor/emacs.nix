@@ -7,9 +7,11 @@
   ];
   environment.systemPackages = with pkgs;[
     ((emacsPackagesFor emacs-git).emacsWithPackages
-      (epkgs:[
-        epkgs.vterm
-      ]))
+      (epkgs:(with epkgs;[
+        vterm
+        treesit-grammars.with-all-grammars # help tree-sitter and tree-sitter-langs works well
+        #tree-sitter-langs
+      ])))
     
     # ((emacsPackagesFor emacs29).emacsWithPackages
     #   (epkgs:[
