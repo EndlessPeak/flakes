@@ -14,96 +14,20 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # all fonts are linked to /nix/var/nix/profiles/system/sw/share/X11/fonts
-  fonts = {
-    # use fonts specified by user rather than default ones
-    enableDefaultFonts = false;
-    fontDir.enable = true;
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs;[
+    # Utils
+    alsa-lib
+    alsa-utils
 
-    fonts = with pkgs; [
-      # icon fonts
-      material-design-icons
-      font-awesome
+    # Broswer
+    firefox
+    google-chrome
 
-      # Noto for no tofu
-      # Noto Sans/Serif CJK SC/TC/HK/JP/KR
-      noto-fonts # No Chinese
-      noto-fonts-cjk # Chinese
-      noto-fonts-emoji 
-      noto-fonts-extra 
-
-      # Adobe SiYuan
-      source-sans # No Chinese. Including `Source Sans 3` `Source Sans Pro` `Source Sans 3 VF`
-      source-serif # No Chinese.
-      source-code-pro #Source Code Pro
-      source-han-sans # Chinese HeiTi
-      source-han-serif # Chinese Song
-
-      # Other Fonts
-      lxgw-wenkai
-      liberation_ttf
-      arkpandora_ttf
-
-      # Font
-      # keep reporting license issue,must add license in nixpkgs
-      joypixels
-
-      # Code and Symbol
-      symbola
-      cascadia-code
-
-      # Chinese
-      wqy_zenhei
-      wqy_microhei
-
-      # nerdfonts
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-          "JetBrainsMono"
-          "SourceCodePro"
-          "Iosevka"
-        ];
-      })
-
-      #(pkgs.callPackage ../../fonts/icomoon-feather-icon-font.nix { })
-
-      # arch linux icon, used temporarily in waybar
-      #(pkgs.callPackage ../../fonts/archcraft-icon-font.nix { })
-
-    ];
-
-    # user defined fonts
-    # the reason there's Noto Color Emoji everywhere is to override DejaVu's
-    # B&W emojis that would sometimes show instead of some Color emojis
-    fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Noto Color Emoji" ];
-      sansSerif = [ "Noto Sans" "Noto Color Emoji" ];
-      monospace = [ "JetBrainsMono Nerd Font" "Noto Color Emoji" ];
-      emoji = [ "Noto Color Emoji" ];
-    };
-  };
-
-  # Input Method
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      (fcitx5-rime.override {
-        rimeDataPkgs = [
-          # rime-data
-          # config.nur.repos.
-          # nur.repos.xddxdd.rime-ice
-          nur.repos.linyinfeng.rimePackages.rime-ice
-        ];
-      })
-      fcitx5-chinese-addons
-      fcitx5-table-extra
-      # The following shows how to use NUR packages
-      #config.nur.repos.ruixi-rebirth.fcitx5-pinyin-moegirl
-      #config.nur.repos.ruixi-rebirth.fcitx5-pinyin-moegirl
-    ];
-  };
- 
+    # Terminal
+    alacritty
+  ];
 
   # dconf is a low-level configuration system.
   programs.dconf.enable = true;
@@ -112,55 +36,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    # Polkit
-    libsForQt5.polkit-kde-agent
-
-    # Editor
-    kate
-    # emacs29
-
-    # Software
-    alsa-lib
-    alsa-utils
-    firefox
-    google-chrome
-    flameshot
-    telegram-desktop
-
-    # Terminal
-    alacritty
- 
-    # Graphics
-    xclip
-    xdg-utils
-    xorg.xrandr
-    libsForQt5.krdc
-    libsForQt5.filelight
-
-    # Nix Utils
-    nix-prefetch-git
-    
-    # SDDM Theme Dependencies
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtgraphicaleffects
-
-    # python,I may need to use python with root permission.
-    #(python310.withPackages (ps: with ps; [
-    #  ipython
-    #  pandas
-    #  requests
-    #  pyquery
-    #  pyyaml
-    #]))
-
-    # config.nur.repos.xddxdd.qqmusic 
-    # nur.repos.xddxdd.qqmusic
-  ];
-
 
   services = {
   # Enable the X11 windowing system.
@@ -303,7 +178,8 @@
   programs.zsh.enable = true;
 
   imports = [
-    ./unstable-software.nix
-    ./private-package.nix
+    ./fonts.nix
+    ./input.nix
+    ./software.nix
   ];
 }

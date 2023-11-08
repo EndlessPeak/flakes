@@ -102,6 +102,9 @@
     vim
     neovim
 
+    # Proxy
+    v2raya
+
     # utils
     tree
     wget

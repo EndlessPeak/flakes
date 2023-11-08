@@ -101,11 +101,11 @@
     pciutils
     usbutils
     
+    # Proxy
+    v2raya
+
     # Shell
     zsh  
   ];
-
-  # replace default editor with emacs
-  environment.variables.EDITOR = "emacs";
 
 }

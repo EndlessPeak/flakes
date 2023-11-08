@@ -26,4 +26,7 @@
       #     epkgs.vterm
       #   ]));
   };
+
+  # replace default editor with emacs
+  environment.variables.EDITOR = "emacs";
 }

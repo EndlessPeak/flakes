@@ -75,13 +75,6 @@
       # blog
       hugo
       pandoc
-
-      # tex & org export
-      bibtex2html
-      texlive.combined.scheme-full
-      
-      # temporily software
-      yt-dlp
     ])
     (with pkgs-unstable;[
       eza # exa now is renamed to eza,it aims to take place of ls
@@ -89,6 +82,8 @@
       # lang server
       nixd
 
+      # temporily software
+      yt-dlp
     ])
   ];
   # programs.zsh.enable = true;
