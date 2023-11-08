@@ -6,12 +6,10 @@
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [
       (fcitx5-rime.override {
-        rimeDataPkgs = [
-          # rime-data
-          # config.nur.repos.
-          # nur.repos.xddxdd.rime-ice
-          nur.repos.linyinfeng.rimePackages.rime-ice
-        ];
+        rimeDataPkgs = with pkgs.nur.repos.linyinfeng.rimePackages;
+          withRimeDeps [
+            rime-ice
+          ];
       })
       fcitx5-chinese-addons
       fcitx5-table-extra
