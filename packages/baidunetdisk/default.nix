@@ -4,6 +4,7 @@
     buildFHSUserEnv, 
     pkgs,
     makeWrapper,
+    writeText,
     ...
 }:
 let
@@ -17,16 +18,37 @@ let
         };
         nativeBuildInputs = [ dpkg  makeWrapper ];
         unpackPhase = "dpkg-deb -x ${src} .";
+
+        # 菜单项
+        desktopFile = writeText "baidunetdisk.desktop" ''
+            [Desktop Entry]
+            Name=baidunetdisk
+            Name[zh_CN]=百度网盘
+            Name[zh_TW]=百度网盘
+            Exec=baidunetdisk --no-sandbox %U
+            Terminal=false
+            Type=Application
+            Icon=baidunetdisk
+            StartupWMClass=baidunetdisk
+            Comment=百度网盘
+            Comment[zh_CN]=百度网盘
+            Comment[zh_TW]=百度网盘
+            MimeType=x-scheme-handler/baiduyunguanjia;
+            Categories=Network;
+        '';
+
         installPhase = ''
             mkdir -p $out/opt/${pname}
             mkdir -p $out/share
             mkdir -p $out/bin
             cp -r ./usr/share/* $out/share
+            rm $out/share/applications/${pname}.desktop
+            install -Dm644 ${desktopFile} $out/share/applications/${pname}.desktop
             cp -r ./opt/${pname}/* $out/opt/${pname}
             chmod 644 $out/opt/${pname}/*.so
             makeWrapper $out/opt/${pname}/${pname} $out/bin/${pname} --set LD_LIBRARY_PATH $out/opt/${pname} --run "echo $out"
         '';
-    };
+};
 in
 buildFHSUserEnv {
     name = "${baidunetdisk.pname}";

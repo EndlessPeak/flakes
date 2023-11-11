@@ -7,13 +7,6 @@
       # sbcl # required by emacs lsp vfork
       universal-ctags
 
-      # CPP
-      gcc
-      gnumake
-      cmake
-      clang
-      clang-tools
-
       # Rust
       rustup
 
