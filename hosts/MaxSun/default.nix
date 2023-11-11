@@ -93,6 +93,6 @@
     ../../modules/desktop
     ../../modules/user
     ../../modules/editor
-    ../../modules/develop
+    ../../modules/develop/code.nix
   ];
 }

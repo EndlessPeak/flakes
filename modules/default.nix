@@ -100,9 +100,6 @@
     sysstat
     pciutils
     usbutils
-    
-    # Proxy
-    v2raya
 
     # Shell
     zsh  

@@ -16,7 +16,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs;[
+  environment.systemPackages = (with pkgs;[
     # Utils
     alsa-lib
     alsa-utils
@@ -27,7 +27,11 @@
 
     # Terminal
     alacritty
-  ];
+  ])++
+  (with pkgs-unstable;[
+    # Proxy
+    v2raya
+  ]);
 
   # dconf is a low-level configuration system.
   programs.dconf.enable = true;

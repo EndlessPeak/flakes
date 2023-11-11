@@ -40,7 +40,7 @@
     experimental-features = [ "nix-command" "flakes"];
     # replace official cache with mirrors located in China
     substituters = [
-      "https://mirrors.cernet.edu.cn/nix-channels/store"
+      "https://mirror.sjtu.edu.cn/nix-channels/store"
       "https://mirrors.bfsu.edu.cn/nix-channels/store"
       #"https://cache.nixos.org/"
     ];
