@@ -6,7 +6,7 @@
     inputs.emacs-overlay.overlay
   ];
   environment.systemPackages = with pkgs;[
-    ((emacsPackagesFor emacs-git).emacsWithPackages
+    ((emacsPackagesFor emacs-unstable).emacsWithPackages
       (epkgs:(with epkgs;[
         vterm
         treesit-grammars.with-all-grammars # help tree-sitter and tree-sitter-langs works well
@@ -20,7 +20,7 @@
   ];
   services.emacs = {
     enable = true;
-    package = pkgs.emacs-git;
+    package = pkgs.emacs-unstable;
       # ((emacsPackagesFor emacs29).emacsWithPackages
       #   (epkgs: [
       #     epkgs.vterm
