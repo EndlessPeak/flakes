@@ -14,25 +14,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = (with pkgs;[
-    # Utils
-    alsa-lib
-    alsa-utils
-
-    # Broswer
-    firefox
-    google-chrome
-
-    # Terminal
-    alacritty
-  ])++
-  (with pkgs-unstable;[
-    # Proxy
-    v2raya
-  ]);
-
   # dconf is a low-level configuration system.
   programs.dconf.enable = true;
 

@@ -72,37 +72,5 @@
   #     PasswordAuthentication = false; # disable password login
   #   };
   #   openFirewall = true;
-  # };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git # used by nix flakes
-
-    # Basic
-    linuxHeaders
-    linux-firmware
-
-    # Editor
-    vim
-    neovim
-
-    # Locales
-    glibcLocales
-
-    # Utils
-    wget
-    curl
-    tree
-    killall
-    
-    # System tools
-    sysstat
-    pciutils
-    usbutils
-
-    # Shell
-    zsh  
-  ];
-
+  # }; 
 }

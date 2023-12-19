@@ -5,37 +5,44 @@
   # $ nix search wget
   environment.systemPackages =
     (with pkgs; [
-      # Polkit
-      libsForQt5.polkit-kde-agent
-
-      # Editor
-      kate
-
-      # Utils
-      flameshot
+      # Broswer
+      firefox
+      google-chrome
 
       # Chat
       telegram-desktop
+
+      # Disk
+      libsForQt5.filelight
+
+      # Editor
+      vim
+      kate
+      neovim
 
       # Graphics & Graphical Utils
       xclip
       xdg-utils
       xorg.xrandr
 
-      # RDP
-      libsForQt5.krdc
+      # Locales
+      glibcLocales
 
-      # Disk
-      libsForQt5.filelight
+      # Linux Basic
+      linuxHeaders
+      linux-firmware
 
       # Nix Utils
       nix-prefetch-git
 
-      # SDDM Theme Dependencies
-      libsForQt5.qt5.qtquickcontrols2
-      libsForQt5.qt5.qtgraphicaleffects
+      # Polkit
+      libsForQt5.polkit-kde-agent
 
-      # python,I may need to use python with root permission.
+      # Picture Capture
+      flameshot
+
+      # Python
+      # I may need to use python with root permission.
       #(python310.withPackages (ps: with ps; [
       #  ipython
       #  pandas
@@ -44,10 +51,35 @@
       #  pyyaml
       #]))
 
-      # config.nur.repos.xddxdd.qqmusic
-      # nur.repos.xddxdd.qqmusic
+      # RDP
+      libsForQt5.krdc
+
+      # System Utils
+      curl
+      tree
+      wget
+      killall
+      alsa-lib
+      alsa-utils
+
+      # System tools
+      sysstat
+      pciutils
+      usbutils
+      
+      # SDDM Theme Dependencies
+      libsForQt5.qt5.qtquickcontrols2
+      libsForQt5.qt5.qtgraphicaleffects
+
+      # Terminal
+      alacritty
+
+      # Version Control
+      git # used by nix flakes
+
     ])++
     (with pkgs-unstable;[
-
+      # Proxy
+      v2raya
     ]);
 }
