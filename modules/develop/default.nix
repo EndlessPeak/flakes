@@ -5,6 +5,6 @@
     ./code.nix
     ./embedded.nix
     ./virtualisation.nix
-    ./latex.nix
+    # ./latex.nix
   ];
 }

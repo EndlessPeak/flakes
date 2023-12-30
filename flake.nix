@@ -11,8 +11,7 @@
 
     # Home manager,used for managing user configuration
     home-manager = {
-      url = "github:nix-community/home-manager";
-      # .../release-23.11
+      url = "github:nix-community/home-manager/release-23.11";
       # The `follows` keyword in inputs is used for inheritance.
       # `inputs.nixpkgs` of home-manager keeps consistent with the `inputs.nixpkgs` of the current flake, in case of occuring problems caused by different versions of nixpkgs dependencies.
       inputs.nixpkgs.follows = "nixpkgs";
