@@ -18,6 +18,8 @@
       "users"
       "networkmanager" 
       "wheel"
+      "docker"
+      "dialout"
     ];
   };
 }

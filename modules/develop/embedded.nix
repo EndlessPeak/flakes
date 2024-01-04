@@ -5,7 +5,7 @@
     (with pkgs;[
       # Embedded Software
       openocd
-
+      cutecom
       # Warning:
       # The following nixpkgs are packaged by leesin wihout any test!
 
@@ -16,7 +16,7 @@
       # (callPackage ./stm32cubeide.nix {})
     ]) ++
     (with pkgs-unstable;[
-      stm32cubemx
+      # stm32cubemx
     ]);
   services.udev.packages = with pkgs;[
     stlink
