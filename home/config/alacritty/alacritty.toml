@@ -1,0 +1,85 @@
+# enable_experimental_conpty_backend = false
+import = ["/home/leesin/.config/alacritty/theme_catppuccino.toml"]
+live_config_reload = true
+working_directory = "None"
+
+[bell]
+animation = "EaseOutExpo"
+color = "0xffffff"
+duration = 0
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[debug]
+log_level = "Warn"
+persistent_logging = false
+print_events = false
+# ref_test = false
+render_timer = false
+
+[font]
+size = 14
+
+[font.bold]
+family = "SauceCodePro Nerd Font Mono"
+style = "Extra Bold"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "SauceCodePro Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "SauceCodePro Nerd Font Mono"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[mouse]
+hide_when_typing = false
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+#[mouse.double_click]
+#threshold = 300
+
+#[mouse.hints]
+#modifiers = "None"
+
+#[mouse.triple_click]
+#threshold = 300
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+
+[window]
+decorations = "full"
+dynamic_padding = false
+opacity = 0.95
+startup_mode = "Windowed"
+dynamic_title = true
+
+[window.dimensions]
+columns = 90
+lines = 30
+
+[window.padding]
+x = 0
+y = 0

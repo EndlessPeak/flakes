@@ -5,7 +5,7 @@
     enable = true;
   };
 
-  xdg.configFile."alacritty/alacritty.yml".source = ./alacritty.yml;
-  xdg.configFile."alacritty/theme_catppuccino.yml".source = ./theme_catppuccino.yml;
+  xdg.configFile."alacritty/alacritty.toml".source = ./alacritty.toml;
+  xdg.configFile."alacritty/theme_catppuccino.toml".source = ./theme_catppuccino.toml;
 
 }

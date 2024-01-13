@@ -17,7 +17,7 @@
 
   boot.loader ={
     efi = {
-      canTouchEfiVariables = false;
+      canTouchEfiVariables = true;
       efiSysMountPoint = "/boot";
     };
     grub = {
@@ -35,7 +35,7 @@
   '';
 
   networking = {
-    hostName = "leesin";   # Define your hostname.
+    hostName = "endlesspeak";   # Define your hostname.
     networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   };
  
@@ -72,7 +72,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
   time.hardwareClockInLocalTime = true;
 
@@ -87,9 +87,6 @@
     # hardware scan
     ./hardware-configuration.nix
     ./nvidia.nix
-
-    # add arch linux boot entry
-    # ./boot-arch.nix
 
     # NixOS configuration
     ../../modules
