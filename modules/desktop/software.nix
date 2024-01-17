@@ -74,6 +74,8 @@
       # Terminal
       alacritty
 
+      tmux
+
       # Version Control
       git # used by nix flakes
 
