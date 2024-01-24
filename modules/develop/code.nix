@@ -9,6 +9,7 @@
 
       # Rust
       rustup
+      # rust-analyzer
     ]) ++
     (with pkgs-unstable;[
       # stm32cubemx

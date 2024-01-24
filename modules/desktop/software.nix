@@ -43,13 +43,14 @@
 
       # Python
       # I may need to use python with root permission.
-      #(python310.withPackages (ps: with ps; [
+      (python3.withPackages (ps: with ps; [
+         numpy
+         pandas
       #  ipython
-      #  pandas
       #  requests
       #  pyquery
       #  pyyaml
-      #]))
+      ]))
 
       # RDP
       libsForQt5.krdc

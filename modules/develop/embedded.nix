@@ -16,7 +16,7 @@
       # (callPackage ./stm32cubeide.nix {})
     ]) ++
     (with pkgs-unstable;[
-      # stm32cubemx
+      stm32cubemx
     ]);
   services.udev.packages = with pkgs;[
     stlink
