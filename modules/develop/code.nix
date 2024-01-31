@@ -15,6 +15,8 @@
       # stm32cubemx
 
       # IDE
+      jetbrains.rust-rover
+
       (jetbrains.clion.overrideAttrs (old:{
         postFixup = ''
           ${old.postFixup}
