@@ -5,6 +5,12 @@
   # $ nix search wget
   environment.systemPackages =
     (with pkgs; [
+      # Extract Tools
+      zip
+      xz
+      unzip
+      p7zip
+
       # Broswer
       firefox
       google-chrome
@@ -43,17 +49,17 @@
 
       # Python
       # I may need to use python with root permission.
-      (python3.withPackages (ps: with ps; [
-         numpy
-         pandas
-      #  ipython
-      #  requests
-      #  pyquery
-      #  pyyaml
-      ]))
+#       (python3.withPackages (ps: with ps; [
+#          numpy
+#          pandas
+#        ipython
+#        requests
+#        pyquery
+#        pyyaml
+#       ]))
 
       # RDP
-      libsForQt5.krdc
+      # libsForQt5.krdc
 
       # System Utils
       curl
@@ -74,6 +80,7 @@
 
       # Terminal
       alacritty
+      wezterm
 
       tmux
 

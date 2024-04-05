@@ -33,7 +33,7 @@
 
       # Font
       # keep reporting license issue,must add license in nixpkgs
-      joypixels
+      # joypixels
 
       # Code and Symbol
       symbola

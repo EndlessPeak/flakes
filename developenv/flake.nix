@@ -26,6 +26,16 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        # OpenCV Dependencies
+        opencv = pkgs.opencv;
+        opencvGtk = opencv.override(old:{
+          enableGtk2 = true;
+          enableGtk3 = true;
+          enableDocs = true;
+        });
+        # SLAM Dependencies
+        dbow2 = pkgs.callPackage ./DBoW2.nix { inherit opencvGtk; };
+        sophus = pkgs.callPackage ./sophus.nix {};
       in
         {
           devShells.default = pkgs.mkShell {
@@ -34,23 +44,28 @@
               # llvmPackages_15.stdenv
               # llvmPackages_15.bintools
 
+              # Compiler
               gcc
               gdb
-              cmake
-              eigen
-              pangolin
-              glew
-              fmt
-
-              (pkgs.callPackage ./sophus.nix {})
-
-              # libGLU # pangolin 依赖 openGL
               clang
               clang-tools
+              cmake
 
-	            # clang_16
-              # clang-tools_16
+              # SLAM Dependencies
+              sqlite
+              suitesparse
+              opencvGtk
 
+              eigen
+              pangolin
+              glew # pangolin 依赖 glew
+              # libGLU # pangolin 依赖 openGL
+              fmt # sophus 可选依赖于 fmt
+              dbow2
+              g2o
+              yaml-cpp
+
+              # Embedded Dependencies
               gcc-arm-embedded
             ];
           };

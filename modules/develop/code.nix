@@ -10,6 +10,9 @@
       # Rust
       rustup
       # rust-analyzer
+
+      # Python
+      conda
     ]) ++
     (with pkgs-unstable;[
       # stm32cubemx

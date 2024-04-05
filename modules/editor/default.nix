@@ -3,6 +3,6 @@
 {
     imports = [
         ./emacs.nix
-        #./vscode.nix
+        ./vscode.nix
     ];
 }

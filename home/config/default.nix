@@ -4,6 +4,7 @@
     ./alacritty 
     ./git
     ./direnv
+    ./wezterm
   ];
 
 }

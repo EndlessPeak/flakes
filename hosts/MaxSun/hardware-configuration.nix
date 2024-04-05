@@ -15,13 +15,23 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/0379146b-102b-42c7-b358-3659b2d09a05";
+    { device = "/dev/disk/by-uuid/2692e63b-c2fc-4b86-a1ef-44f1f50a3907";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/906C-AD0D";
+    { device = "/dev/disk/by-uuid/2373-CC53";
       fsType = "vfat";
+    };
+
+  fileSystems."/home/leesin/Documents" =
+    { device = "/dev/disk/by-uuid/21b0b579-537c-4be4-8db5-a74665ec137f";
+      fsType = "ext4";
+    };
+
+  fileSystems."/home/leesin/Develop" =
+    { device = "/dev/disk/by-uuid/f964f60a-28aa-4364-963e-ad598cda5586";
+      fsType = "ext4";
     };
 
   swapDevices = [ ];
@@ -35,6 +45,6 @@
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
