@@ -12,7 +12,16 @@
       # rust-analyzer
 
       # Python
-      conda
+      # Now we consider use poetry instead of conda
+      poetry
+      # conda
+
+      # Git GUI
+      github-desktop
+
+      # Nodejs
+      # Used for hugo
+      nodejs_21
     ]) ++
     (with pkgs-unstable;[
       # stm32cubemx

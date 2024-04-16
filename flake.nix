@@ -18,7 +18,7 @@
     };
 
     # Rust overlay
-    rust-overlay.url = "github:oxalica/rust-overlay";
+    # rust-overlay.url = "github:oxalica/rust-overlay";
 
     # NixOS User Repository
     nur.url = "github:nix-community/NUR";
@@ -26,6 +26,10 @@
     # flake-root.url = "github:srid/flake-root";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+    # nix-ld-rs.url = "github:nix-community/nix-ld-rs";
+    # nix-ld-rs.inputs.nixpkgs.follows = "nixpkgs";
+    # nix-ld-rs.inputs.flake-utils.follows = "flake-utils";
 
     # flake-compat = {
     #   url = "github:inclyc/flake-compat";
