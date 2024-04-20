@@ -13,7 +13,7 @@
 
       # Python
       # Now we consider use poetry instead of conda
-      poetry
+      # poetry
       # conda
 
       # Git GUI
