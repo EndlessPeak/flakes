@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
+{ config, lib, pkgs, ... }:
 
 # let
 #   vscodeWithExtension = pkgs.vscode-with-extensions.override {

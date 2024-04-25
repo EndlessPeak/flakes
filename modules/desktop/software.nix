@@ -1,95 +1,108 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages =
-    (with pkgs; [
-      # Extract Tools
-      zip
-      xz
-      unzip
-      p7zip
+  environment.systemPackages = with pkgs; [
+    # Extract Tools
+    zip
+    xz
+    unzip
+    p7zip
 
-      # Broswer
-      firefox
-      google-chrome
+    # Broswer
+    # firefox
+    google-chrome
 
-      # Chat
-      telegram-desktop
+    # Chat
+    telegram-desktop
 
-      # Disk
-      libsForQt5.filelight
+    # Editor
+    vim
+    kate
+    neovim
 
-      # Editor
-      vim
-      kate
-      neovim
+    # Graphics & Graphical Utils
+    xclip
+    xdg-utils
+    xorg.xrandr
 
-      # Graphics & Graphical Utils
-      xclip
-      xdg-utils
-      xorg.xrandr
+    # Locales
+    glibcLocales
 
-      # Locales
-      glibcLocales
+    # Linux Basic
+    linuxHeaders
+    linux-firmware
 
-      # Linux Basic
-      linuxHeaders
-      linux-firmware
+    # Picture Capture
+    flameshot
 
-      # Nix Utils
-      nix-prefetch-git
+    # Python
+    # I may need to use python with root permission.
+    # (python3.withPackages (ps: with ps; [
+    #   numpy
+    #   pandas
+    #   ipython
+    #   requests
+    #   pyquery
+    #   pyyaml
+    # ]))
 
-      # Polkit
-      libsForQt5.polkit-kde-agent
+    # System Utils
+    curl
+    tree
+    wget
+    killall
+    alsa-lib
+    alsa-utils
 
-      # Picture Capture
-      flameshot
+    # System tools
+    sysstat
+    pciutils
+    usbutils
+    
+    # Terminal
+    alacritty
+    wezterm
 
-      # Python
-      # I may need to use python with root permission.
-#       (python3.withPackages (ps: with ps; [
-#          numpy
-#          pandas
-#        ipython
-#        requests
-#        pyquery
-#        pyyaml
-#       ]))
+    tmux
 
-      # RDP
-      # libsForQt5.krdc
+    # Version Control
+    git # used by nix flakes
 
-      # System Utils
-      curl
-      tree
-      wget
-      killall
-      alsa-lib
-      alsa-utils
+    # Proxy
+    v2raya
+    
+    # RDP
+    # libsForQt5.krdc
 
-      # System tools
-      sysstat
-      pciutils
-      usbutils
-      
-      # SDDM Theme Dependencies
-      libsForQt5.qt5.qtquickcontrols2
-      libsForQt5.qt5.qtgraphicaleffects
+    # Polkit
+    libsForQt5.polkit-kde-agent
 
-      # Terminal
-      alacritty
-      wezterm
+    # Disk
+    libsForQt5.filelight
 
-      tmux
+    # SDDM Theme Dependencies
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtgraphicaleffects
 
-      # Version Control
-      git # used by nix flakes
+    # KDE Apperence
+    lightly-qt
 
-    ])++
-    (with pkgs-unstable;[
-      # Proxy
-      v2raya
-    ]);
+    # Video
+    vlc
+    obs-studio
+    ffmpeg
+
+    # Others
+    qq
+    nur.repos.xddxdd.qqmusic
+
+    # SFTP
+    filezilla
+
+    # blog
+    hugo
+    pandoc
+  ];
 }

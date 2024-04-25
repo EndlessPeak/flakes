@@ -1,10 +1,9 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-
-  nixpkgs.overlays = [
-    inputs.emacs-overlay.overlay
-  ];
+#   nixpkgs.overlays = [
+#     inputs.emacs-overlay.overlay
+#   ];
   environment.systemPackages = with pkgs;[
     ((emacsPackagesFor emacs-unstable).emacsWithPackages
       (epkgs:(with epkgs;[

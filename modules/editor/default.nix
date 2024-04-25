@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-    imports = [
-        ./emacs.nix
-        ./vscode.nix
-    ];
+  imports = [
+    ./emacs.nix
+    ./vscode.nix
+  ];
 }

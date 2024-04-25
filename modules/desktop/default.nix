@@ -1,42 +1,28 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
-
+{ config, lib, pkgs, ... }:
 {
-  # NixOS's core configuration for leesin's desktop computer
+  # NixOS's core configuration for xahlee's desktop computer
   # This file aims to build X11 KDE Environment
 
-  # For power management
-  # Conflicts with services.tlp
   services = {
+    # For power management
+    # Conflicts with services.tlp
     power-profiles-daemon.enable = false;
     upower.enable = true;
-  };
- 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
-  # dconf is a low-level configuration system.
-  programs.dconf.enable = true;
+    # Enable CUPS to print documents.
+    printing.enable = true;
 
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = true;
-
-  services = {
-  # Enable the X11 windowing system.
+    # Enable the X11 windowing system.
     xserver = {
       enable = true;
-
       # Enable the Plasma 5 Desktop Environment.
-      displayManager ={
-        sddm.enable = true;
-        sddm.theme = "${import ./sddm-theme.nix { inherit pkgs;}}";
-      };
-
       desktopManager.plasma5.enable = true;
+    };
 
-      # Enable touchpad support (enabled default in most desktopManager).
-      libinput.enable = true;
+    # Enable Sddm
+    displayManager ={
+      sddm.enable = true;
+      sddm.theme = "${import ./sddm-theme.nix { inherit pkgs;}}";
     };
     # PipeWire is a new low-level multimedia framework.
     # It aims to offer capture and playback for both audio and video with minimal latency.
@@ -55,38 +41,48 @@
       # no need to redefine it in your config for now)
       #media-session.enable = true;
     };
-  };
 
-  # Remove sound.enable or turn it off if you had it set previously
-  # pulseaudio seems cause conflicts with pipewire
-  sound.enable = false;
-  # Disable pulseaudio, it conflicts with pipewire too.
-  hardware.pulseaudio.enable = false;
-
-  # enable bluetooth & gui paring tools - blueman
-  # or you can use cli:
-  # $ bluetoothctl
-  # [bluetooth] # power on
-  # [bluetooth] # agent on
-  # [bluetooth] # default-agent
-  # [bluetooth] # scan on
-  # ...put device in pairing mode and wait [hex-address] to appear here...
-  # [bluetooth] # pair [hex-address]
-  # [bluetooth] # connect [hex-address]
-  # Bluetooth devices automatically connect with bluetoothctl as well:
-  # [bluetooth] # trust [hex-address]
-  hardware.bluetooth.enable = true;
-  services = {
     blueman.enable = true;
-
+    
     # https://flatpak.org/setup/NixOS
-    flatpak.enable = true;
+    flatpak.enable = false;
 
     # Proxy
     v2raya.enable = true;
 
     # sysstat
     sysstat.enable = true;
+  };
+
+  # Remove sound.enable or turn it off if you had it set previously
+  # pulseaudio seems cause conflicts with pipewire
+  sound.enable = false;
+  
+  hardware = {
+    # Disable pulseaudio, it conflicts with pipewire too.
+    pulseaudio.enable = false;
+
+    # enable bluetooth & gui paring tools - blueman
+    # or you can use cli:
+    # $ bluetoothctl
+    # [bluetooth] # power on
+    # [bluetooth] # agent on
+    # [bluetooth] # default-agent
+    # [bluetooth] # scan on
+    # ...put device in pairing mode and wait [hex-address] to appear here...
+    # [bluetooth] # pair [hex-address]
+    # [bluetooth] # connect [hex-address]
+    # Bluetooth devices automatically connect with bluetoothctl as well:
+    # [bluetooth] # trust [hex-address]
+    bluetooth.enable = true;
+  };
+
+  programs = {
+    # dconf is a low-level configuration system.
+    dconf.enable = true;
+    # enable zsh system-wide
+    zsh.enable = true;
+
   };
 
   # security with polkit
@@ -103,6 +99,7 @@
       });
     '';
   };
+
   systemd = {
     user.services.plasma-polkit-agent = {
       wantedBy = [ "graphical-session.target" ];
@@ -117,22 +114,6 @@
       };
     };
   };
-
-  # Following are security with gnome-kering
-  # services.gnome.gnome-keyring.enable = true;
-  # security.pam.services.greetd.enableGnomeKeyring = true;
-
-  # services = {
-  #   # dbus.packages = [ pkgs.gcr ];
-
-  #   # geoclue2.enable = true;
-  #   udev.enable = true;
-  #   udev.packages = with pkgs; [
-  #     gnome.gnome-settings-daemon
-  #     platformio # udev rules for platformio
-  #     android-udev-rules
-  #   ];
-  # };
 
   # XDG
   xdg.portal = {
@@ -156,12 +137,7 @@
     bash
     zsh
   ];
-  # set user's default shell system-wide
-  users.defaultUserShell = pkgs.bash;
-
-  # enable zsh system-wide
-  programs.zsh.enable = true;
-
+  
   imports = [
     ./fonts.nix
     ./input.nix

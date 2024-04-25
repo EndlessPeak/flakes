@@ -1,5 +1,5 @@
 # enable_experimental_conpty_backend = false
-import = ["/home/leesin/.config/alacritty/theme_catppuccino.toml"]
+import = ["/home/xahlee/.config/alacritty/theme_catppuccino.toml"]
 live_config_reload = true
 working_directory = "None"
 

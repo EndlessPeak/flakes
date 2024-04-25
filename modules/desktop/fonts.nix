@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # all fonts are linked to /nix/var/nix/profiles/system/sw/share/X11/fonts
@@ -28,8 +28,8 @@
 
       # Other Fonts
       lxgw-wenkai
-      liberation_ttf
-      arkpandora_ttf
+      # liberation_ttf
+      # arkpandora_ttf
 
       # Font
       # keep reporting license issue,must add license in nixpkgs

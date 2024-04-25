@@ -1,8 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
+# This file contains the nix installation information.
+
+# Edit this configuration file to define what should be installed on your system.  
+# Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ config, pkgs, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -15,20 +17,17 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader ={
     efi = {
-      canTouchEfiVariables = true;
+      canTouchEfiVariables = false;
       efiSysMountPoint = "/boot";
     };
     grub = {
       enable = true;
       devices = [ "nodev" ];
       efiSupport = true;
-      useOSProber = true;
     };
   };
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "endlesspeak";   # Define your hostname.
+  networking.hostName = "ivara";   # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -47,14 +46,19 @@
     # keyMap = "us";
     useXkbConfig = true; # use xkbOptions in tty.
   };
-  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "zh_CN.UTF-8/UTF-8" "zh_TW.UTF-8/UTF-8" "zh_HK.UTF-8/UTF-8" ];
+  i18n.supportedLocales = [ 
+    "en_US.UTF-8/UTF-8" 
+    "zh_CN.UTF-8/UTF-8" 
+    "zh_TW.UTF-8/UTF-8" 
+    "zh_HK.UTF-8/UTF-8" 
+  ];
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
 
   # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
 
@@ -70,16 +74,18 @@
   hardware.pulseaudio.enable = false;
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.leesin = {
-    name = "leesin";
+  users.users.xahlee = {
+    name = "xahlee";
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager"]; # Enable ‘sudo’ for the user.
   };
   nix.settings ={
-    substituters = lib.mkForce [ "https://mirrors.cernet.edu.cn/nix-channels/store" ];
+    substituters = lib.mkForce [ 
+      "https://mirror.sjtu.edu.cn/nix-channels/store"
+    ];
     experimental-features = ["nix-command" "flakes"];
   };
 
@@ -87,6 +93,7 @@
   #nix.settings.substituters = lib.mkForce [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
   #nix.settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];
   #nix.settings.substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
+  #nix.settings.substituters = [ "https://mirrors.cernet.edu.cn/nix-channels/store" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -110,9 +117,9 @@
     wget
     curl
 
-    #shell and terminal
-    alacritty
-    zsh
+    # nix utils
+    nh
+    nix-output-monitor
 
     # system tools
     sysstat
@@ -150,7 +157,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
   time.hardwareClockInLocalTime = true;
 }

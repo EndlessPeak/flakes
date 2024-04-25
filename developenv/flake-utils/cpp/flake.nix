@@ -10,11 +10,10 @@
       "https://mirrors.bfsu.edu.cn/nix-channels/store"
       #"https://cache.nixos.org/"
     ];
-    allowUnfree = true;
-    cudaSupport = true;
   };
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -27,13 +26,16 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        # OpenCV Dependencies
         opencv = pkgs.opencv;
         opencvGtk = opencv.override(old:{
           enableGtk2 = true;
           enableGtk3 = true;
           enableDocs = true;
         });
+        # SLAM Dependencies
         dbow2 = pkgs.callPackage ./DBoW2.nix { inherit opencvGtk; };
+        sophus = pkgs.callPackage ./sophus.nix {};
       in
         {
           devShells.default = pkgs.mkShell {
@@ -41,25 +43,32 @@
               # gccStdenv
               # llvmPackages_15.stdenv
               # llvmPackages_15.bintools
+
               # Compiler
               gcc
               gdb
-              lldb_16
-              clang-tools_16
+              clang-tools
               clang
               cmake
 
               # SLAM Dependencies
               sqlite
               suitesparse
+
               opencvGtk
               dbow2
-              g2o
-              pangolin
+
               eigen
-              glew
+              pangolin
+              glew # pangolin 依赖 glew
+              # libGLU # pangolin 依赖 openGL
+              fmt # sophus 可选依赖于 fmt
+
+              g2o
               yaml-cpp
-              # libGLU # pangolin requires openGL
+
+              # Embedded Dependencies
+              gcc-arm-embedded
             ];
           };
         });
